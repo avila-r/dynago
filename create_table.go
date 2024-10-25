@@ -21,7 +21,7 @@ type (
 	}
 )
 
-type CreateTableParams struct {
+type NewTable struct {
 	Attributes    []Attribute
 	Keys          []Key
 	ProvisionedTP ProvisionedTP
@@ -50,10 +50,10 @@ var (
 	}
 )
 
-func (c *Dynago) NewTable(name string, params ...CreateTableParams) error {
+func (c *Dynago) NewTable(name string, params ...NewTable) error {
 	input := DefaultInput
 
-	var p *CreateTableParams
+	var p *NewTable
 	if len(params) > 0 {
 		p = &params[0]
 	}
@@ -73,7 +73,7 @@ func (c *Dynago) NewTable(name string, params ...CreateTableParams) error {
 	return err
 }
 
-func FromParams(params CreateTableParams) *dynamodb.CreateTableInput {
+func FromParams(params NewTable) *dynamodb.CreateTableInput {
 	attributes := []*dynamodb.AttributeDefinition{}
 	for _, atr := range params.Attributes {
 		attributes = append(attributes, &dynamodb.AttributeDefinition{

@@ -2,15 +2,15 @@ package dynago
 
 import "github.com/aws/aws-sdk-go/service/dynamodb"
 
-type ListTableParams struct {
+type ListTables struct {
 	StartFrom string `min:"3" type:"string"`
 	Limit     int64  `min:"1" type:"integer"`
 
 	From *dynamodb.ListTablesInput
 }
 
-func (c *Dynago) ListTables(params ...ListTableParams) ([]string, error) {
-	p := ListTableParams{}
+func (c *Dynago) ListTables(params ...ListTables) ([]string, error) {
+	p := ListTables{}
 	if len(params) > 0 {
 		p = params[0]
 	}
